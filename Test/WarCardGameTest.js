@@ -1,6 +1,5 @@
 let playerOneScore = [];
 let playerTwoScore = [];
-let tieMatches = [];
 let playerOneName = 'Ranma';
 let playerTwoName = 'Akane';
 
@@ -58,10 +57,31 @@ class Board {
         this.players[0].playerCards = d.cards.slice(0,26);
         this.players[1].playerCards = d.cards.slice(26,52);
     }
+   
+        
 }
 
 let gameBoard = new Board();
 gameBoard.start(playerOneName, playerTwoName);
+
+
+// let playerOneHand = gameBoard.players[0].playerCards.pop();
+// let playerTwoHand = gameBoard.players[1].playerCards.pop();
+// console.log(playerOneHand);
+// console.log(playerTwoHand);
+// console.log(playerOneHand.value)
+// if (playerOneHand.value > playerTwoHand.value) {
+//     console.log(playerOneName + ' WINS');
+//     playerOneScore.push(1);
+// } else {
+//     console.log(playerTwoName + ' WINS');
+//     playerTwoScore.push(1);
+// }
+
+// console.log(playerOneName + ' has a score of ' + playerOneScore.length);
+// console.log(playerTwoName + ' has a score of ' + playerTwoScore.length);
+
+console.log(gameBoard.players);
 
 function deal() {
     let playerOneHand = gameBoard.players[0].playerCards.pop();
@@ -71,7 +91,7 @@ function deal() {
     } else if (playerOneHand.value < playerTwoHand.value) {
         playerTwoScore.push(1);
     } else {
-        tieMatches.push(1);
+        return null 
     }
 }
 
@@ -79,15 +99,21 @@ function declareWinner () {
     if (playerOneScore.length > playerTwoScore.length) {
         console.log(playerOneName.toUpperCase() + ' WINS!!');
         alert(playerOneName.toUpperCase() + ' WINS!!');
-    } else if (playerOneScore.length < playerTwoScore.length) {
+    } else {
         console.log(playerTwoName.toUpperCase() + ' WINS!!');
         alert(playerTwoName.toUpperCase() + ' WINS!!');
-    } else {
-        alert('The game has ended in a tie');
     }
     console.log(playerOneName + ' finished with a score of ' + playerOneScore.length);
     console.log(playerTwoName + ' finished with a score of ' + playerTwoScore.length);
-    console.log('There were a total of ' + tieMatches.length + ' tie matches.');
+}
+
+function winnerAlert () {
+    if (playerOneScore.length > playerTwoScore.length) {
+        alert(playerOneName.toUpperCase() + ' WINS!!');
+    } else {
+        alert(playerTwoName.toUpperCase() + ' WINS!!')
+    }
+    
 }
 
 do {
