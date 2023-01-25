@@ -1,8 +1,8 @@
 let playerOneScore = [];
 let playerTwoScore = [];
 let tieMatches = [];
-let playerOneName = 'Ranma';
-let playerTwoName = 'Akane';
+let playerOneName = prompt("Enter Player One's name");
+let playerTwoName = prompt("Enter Player Two's name");
 
 class Card {
     constructor(rank, suit, value) {
@@ -41,7 +41,7 @@ class Deck {
 class Player {
     constructor(name) {
         this.playerName = name;
-        this.playerCards - [];
+        this.playerCards = [];
     }
 }
 
@@ -64,15 +64,32 @@ let gameBoard = new Board();
 gameBoard.start(playerOneName, playerTwoName);
 
 function deal() {
+    let roundNumber = (27 - gameBoard.players[0].playerCards.length)
     let playerOneHand = gameBoard.players[0].playerCards.pop();
     let playerTwoHand = gameBoard.players[1].playerCards.pop();
     if (playerOneHand.value > playerTwoHand.value) {
         playerOneScore.push(1);
+        console.log(`Round ${roundNumber} goes to ${playerOneName}
+        -------------
+        Current Score:
+        ${playerOneName} - ${playerOneScore.length}
+        ${playerTwoName} - ${playerTwoScore.length}`)
     } else if (playerOneHand.value < playerTwoHand.value) {
         playerTwoScore.push(1);
+        console.log(`Round ${roundNumber} goes to ${playerTwoName}
+        -------------
+        Current Score:
+        ${playerOneName} - ${playerOneScore.length}
+        ${playerTwoName} - ${playerTwoScore.length}`)  
     } else {
         tieMatches.push(1);
-    }
+        console.log(`Round ${roundNumber} is a tie.
+        --------------
+        Current Score:
+        ${playerOneName} - ${playerOneScore.length}
+        ${playerTwoName} - ${playerTwoScore.length}`)
+    }  
+    
 }
 
 function declareWinner () {
@@ -95,7 +112,8 @@ do {
 } while (gameBoard.players[0].playerCards.length > 0  || gameBoard.players[1].playerCards.length > 0);
 
 
+
 setTimeout (() => {
     declareWinner()
-}, 5000);
+}, 3000);
 
