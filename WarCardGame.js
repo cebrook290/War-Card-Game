@@ -3,6 +3,7 @@ let playerTwoScore = [];
 let tieMatches = [];
 let playerOneName = prompt("Enter Player One's name");
 let playerTwoName = prompt("Enter Player Two's name");
+let winner = "";
 
 class Card {
     constructor(rank, suit, value) {
@@ -60,9 +61,6 @@ class Board {
     }
 }
 
-let gameBoard = new Board();
-gameBoard.start(playerOneName, playerTwoName);
-
 function deal() {
     let roundNumber = (27 - gameBoard.players[0].playerCards.length)
     let playerOneHand = gameBoard.players[0].playerCards.pop();
@@ -94,11 +92,13 @@ function deal() {
 
 function declareWinner () {
     if (playerOneScore.length > playerTwoScore.length) {
-        console.log(playerOneName.toUpperCase() + ' WINS!!');
-        alert(playerOneName.toUpperCase() + ' WINS!!');
+        let winner = playerOneName;
+        console.log(winner.toUpperCase() + ' WINS!!');
+        alert(winner.toUpperCase() + ' WINS!!');
     } else if (playerOneScore.length < playerTwoScore.length) {
-        console.log(playerTwoName.toUpperCase() + ' WINS!!');
-        alert(playerTwoName.toUpperCase() + ' WINS!!');
+        let winner = playerTwoName
+        console.log(winner.toUpperCase() + ' WINS!!');
+        alert(winner.toUpperCase() + ' WINS!!');
     } else {
         alert('The game has ended in a tie');
     }
@@ -107,10 +107,12 @@ function declareWinner () {
     console.log('There were a total of ' + tieMatches.length + ' tie matches.');
 }
 
+let gameBoard = new Board();
+gameBoard.start(playerOneName, playerTwoName);
+
 do {
     deal()
 } while (gameBoard.players[0].playerCards.length > 0  || gameBoard.players[1].playerCards.length > 0);
-
 
 
 setTimeout (() => {
